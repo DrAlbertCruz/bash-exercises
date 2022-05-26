@@ -1,6 +1,6 @@
 #/bin/bash
 
-# Algorithm 1 from Chapter 3 in the Rosen Discrete Structures textbook. It 
+# Algorithm 1 from Chapter 3 in the Rosen Discrete Structures textbook 7e. It 
 # should perform a linear search to find the maximum value in an array.
 
 # === INPUT VALIDATION ===
@@ -12,6 +12,7 @@ if ! [ -e "$file" ]; then
 	exit 1
 fi
 
+# === CODE ===
 # Preload max with the first element in the file using `head`
 max=$(head -n 1 $file)
 echo "Current max value is ${max}"
