@@ -8,20 +8,30 @@
 # numbers to be processed, with \n delimiters.
 file=$1
 if ! [ -e "$file" ]; then
-	echo "$0: $file does not exist!"
+	echo "$0: The file '$file' does not exist!"
 	exit 1
 fi
 
 # === CODE ===
-# Preload max with the first element in the file using `head`
-max=$(head -n 1 $file)
-echo "Current max value is ${max}"
-# We don't need an index because you can iterate over lines in a file in bash
+# Read the file into an array
+array=()
+length=0
 while read -r line; do
-	echo "Next line in file is ${line}"
-	if (($line > $max)); then
+	echo "Next line in the file is ${line}"
+	array+=("$line")
+	((length++))
+done < $file
+# Preload max with the first element in the array
+max=${array[0]}
+echo "Current max value is ${max}"
+n=0
+while ((n < length)); do
+	element=${array[n]}
+	echo "The counter is currently ${n} and the next element in the array is ${element}"
+	if ((element > max)); then
 		echo "It is greater than ${max}, so it will replace it."
-		max=$line
+		max=$element
 	fi
-done < "$file"
-echo "Max value in the array is ${max}."
+	((n++))
+done
+echo "Max value in the array is ${max} on line ${n}."
