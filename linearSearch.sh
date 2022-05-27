@@ -19,21 +19,27 @@ if [ -z "$value" ]; then
 fi
 
 # === CODE ===
-# Use cat and wc -l to get the length of the file
-length=$(cat $file | wc -l)
-N=0
-while (($N < $length)); do
-	((N++))
-	# Use head and tail to perform random access on a specific line in the
-	# file
-	a=$(head -n $N $file | tail -1)
-	echo "Checking value ${a}"
-	if (($a == $value)); then 
+# Read the file into an array
+length=0
+array=()
+while read -r line; do
+	echo "The next line in the file is ${line}."
+	array+=("$line")
+	((length++))
+done < "$file"
+echo "Done reading file, ${length} lines were read."
+# Now do the linear search
+p=0
+while ((p < length)); do
+	((p++))
+	element=${array[p]}
+	echo "Checking value ${element}"
+	if ((element == value)); then 
 		break
 	fi
 done
-if (($N == $length)); then
+if ((p == length)); then
 	echo "Value not found"
 else
-	echo "Value $value found at line $N"
+	echo "Value $value found at line $((p+1))" # People don't zero index
 fi
