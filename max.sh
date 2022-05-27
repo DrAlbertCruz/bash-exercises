@@ -17,21 +17,21 @@ fi
 array=()
 length=0
 while read -r line; do
-	echo "Next line in the file is ${line}"
+	echo "Next line in the file is $line"
 	array+=("$line")
 	((length++))
 done < $file
 # Preload max with the first element in the array
 max=${array[0]}
-echo "Current max value is ${max}"
+echo "Current max value is $max"
 n=0
 while ((n < length)); do
 	element=${array[n]}
-	echo "The counter is currently ${n} and the next element in the array is ${element}"
+	echo "The counter is currently $n and the next element in the array is $element"
 	if ((element > max)); then
-		echo "It is greater than ${max}, so it will replace it."
+		echo "It is greater than $max, so it will replace it."
 		max=$element
 	fi
 	((n++))
 done
-echo "Max value in the array is ${max} on line ${n}."
+echo "Max value in the array is $max on line $n."
