@@ -1,4 +1,7 @@
-#/bin/bash
+#!/bin/bash
+# Bash is not the same as C. However, since this algorithm is linear cost, perhaps it is OK to implement it
+# entirely in bash. 
+
 # === INPUT VALIDATION ==
 # If argument $1 is provided its length will be non-zero
 if [ -z "$1" ]
@@ -6,6 +9,8 @@ if [ -z "$1" ]
 		echo "Usage: ./fib N ... where N is the index of the Fibonacci number"
 		exit 0
 fi
+# === CODE ===
+# The code itself.
 VAR1=0 # First fib number
 VAR2=1 # Second fib number
 N=0 # Start count at 0
