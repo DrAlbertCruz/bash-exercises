@@ -12,20 +12,17 @@ if [ -z $n ]; then
 fi
 
 ### === CODE ===
-fib () (
-	local n=$1 						# Shadow input value into local scope
+fib () {
+	local n="$1" 					# Shadow input value into local scope
 	local temp=0					# Instantiate a local variable for holding
 	if (( n == 0)); then			# ... result of first call to Fib
 		return 0
 	elif (( n == 1 )); then
 		return 1
 	fi
-	fib $n 							# First recursive call to fib
-	temp=$?							# Shadow result into local variable space
-	fib $(( n - 1 ))				# Second call to fib
-	result=(( $? + $temp ))	
-	return $result					# Return result of second call plus `temp`
-	)
+	temp=$(( fib $n ))				# Call first fib(n)
+	return $(( $temp + $(( fib $(( $n - 1 )) )) ))	# Return result of second call plus `temp`
+}
 
-p=$(( fib n ))
-echo "The ${n}-the Fibonacci number is ${p}"
+fib $n
+echo "The ${n}-th Fibonacci number is $?"
